@@ -48,7 +48,7 @@ var PreferencesMenu = fyne.NewMenu(
 	fyne.NewMenuItem("Online Services", nil),
 )
 
-func Init() {
+func FileView() {
 	OpenRecent.ChildMenu = OpenRecentChildMenu
 	Share.ChildMenu = ShareMenu
 	Preferences.ChildMenu = PreferencesMenu

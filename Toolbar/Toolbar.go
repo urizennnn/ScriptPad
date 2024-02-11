@@ -38,3 +38,11 @@ var run = fyne.NewMenu(
 var Extend = fyne.NewMenu("...", ExtendChildMenu, Help)
 
 var AppMenu = fyne.NewMainMenu(File, Edit, Selection, View, Go, run, Extend)
+
+func Init() {
+	FileView()
+	ViewChild()
+	GoChild()
+	RunChild()
+	ExtendChild()
+}

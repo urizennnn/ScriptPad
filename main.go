@@ -13,7 +13,6 @@ import (
 func main() {
 	a := app.New()
 	Toolbar.Init()
-	//Toolbar.ExtendChild()
 	w := a.NewWindow("Script Pad")
 	w.Resize(fyne.NewSize(1200, 800))
 	icon, err := fyne.LoadResourceFromPath("C:/Users/Victor/Desktop/Urizen's Text  Editor/images/chinmay-b-fd9mIBluHkA-unsplash.jpg")
