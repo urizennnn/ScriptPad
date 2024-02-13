@@ -74,6 +74,16 @@ type Image struct {
 	ScaleMode    ImageScale // Specify the type of scaling interpolation applied to the image
 }
 
+func (i *Image) Name() string {
+    //TODO implement me
+    panic("implement me")
+}
+
+func (i *Image) Content() []byte {
+    //TODO implement me
+    panic("implement me")
+}
+
 // Alpha is a convenience function that returns the alpha value for an image
 // based on its Translucency value. The result is 1.0 - Translucency.
 func (i *Image) Alpha() float64 {
