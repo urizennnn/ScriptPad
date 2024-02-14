@@ -75,43 +75,43 @@ type MainMenu struct {
 }
 
 func (m *MainMenu) MinSize() Size {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Move(position Position) {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Position() Position {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Resize(size Size) {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Size() Size {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Hide() {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Visible() bool {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *MainMenu) Show() {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 // NewMainMenu creates a top level menu structure used by fyne.Window for displaying a menubar

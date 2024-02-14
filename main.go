@@ -9,7 +9,7 @@ import (
 func main() {
 	a := app.New()
 	w := a.NewWindow("Script Pad")
-	// w.Resize(fyne.NewSize(1024, 800))
+	//w.Resize(fyne.NewSize(1024, 800))
 	Menu.Init()
 
 	// a.Settings().SetTheme(theme.DarkTheme())

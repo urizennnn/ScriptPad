@@ -75,13 +75,13 @@ type Image struct {
 }
 
 func (i *Image) Name() string {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 func (i *Image) Content() []byte {
-    //TODO implement me
-    panic("implement me")
+	//TODO implement me
+	panic("implement me")
 }
 
 // Alpha is a convenience function that returns the alpha value for an image

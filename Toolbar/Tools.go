@@ -30,7 +30,7 @@ func CreateToolbar() fyne.CanvasObject {
 	debugToolbar := widget.NewToolbar(debug)
 
 	extensions := widget.NewToolbar(widget.NewToolbarAction(theme.GridIcon(), func() {}))
-	return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar)
+	return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Utility())
 }
 
 func LoadGit() *widget.ToolbarAction {
