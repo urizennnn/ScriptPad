@@ -1,6 +1,7 @@
 package Layout
 
 import (
+    `fmt`
     "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/canvas"
     "fyne.io/fyne/v2/container"
@@ -8,7 +9,7 @@ import (
     `fyne.io/fyne/v2/dialog`
     "fyne.io/fyne/v2/theme"
     "fyne.io/fyne/v2/widget"
-    "github.com/urizennnn/ScriptPad/Toolbar"
+    `github.com/urizennnn/ScriptPad/Toolbar`
     "image/color"
     `log`
 )
@@ -59,7 +60,8 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
         },
     )
     
-    left := container.NewStack(Toolbar.CreateToolbar(g.Win), files)
+    left := container.NewStack(CreateToolbar(g.Win, &Gui{Win: g.Win}), files)
+    
     //tree := g.tree
     content := container.NewStack(
         canvas.NewRectangle(
@@ -72,6 +74,7 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
     return container.New(newScript(left, content, divider), objs...)
 }
 func (g *Gui) OpenFolder(w fyne.Window) {
+    fmt.Println("open")
     dialog.ShowFolderOpen(
         func(dir fyne.ListableURI, err error) {
             if err != nil {
@@ -106,4 +109,36 @@ func (g *Gui) Open(dir fyne.ListableURI) {
             return
         }
     }
+}
+
+func CreateToolbar(w fyne.Window, gui *Gui) fyne.CanvasObject {
+    file := widget.NewToolbar(
+        widget.NewToolbarAction(
+            theme.ContentCopyIcon(), func() {
+                gui.OpenFolder(w)
+            },
+        ),
+    )
+    search := widget.NewToolbar(
+        widget.NewToolbarAction(
+            theme.SearchIcon(), func() {
+                // Add functionality for search if needed
+            },
+        ),
+    )
+    
+    git := Toolbar.LoadGit()
+    gitToolbar := widget.NewToolbar(git)
+    debug := Toolbar.LoadDebug()
+    debugToolbar := widget.NewToolbar(debug)
+    
+    extensions := widget.NewToolbar(
+        widget.NewToolbarAction(
+            theme.GridIcon(), func() {
+                // Add functionality for extensions if needed
+            },
+        ),
+    )
+    
+    return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Toolbar.Utility())
 }
