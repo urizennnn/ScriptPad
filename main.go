@@ -1,20 +1,25 @@
 package main
 
 import (
-	"fyne.io/fyne/v2/app"
-	"github.com/urizennnn/ScriptPad/Layout"
-	"github.com/urizennnn/ScriptPad/Menu"
+    "fyne.io/fyne/v2"
+    "fyne.io/fyne/v2/app"
+    `fyne.io/x/fyne/theme`
+    "github.com/urizennnn/ScriptPad/Menu"
+    `github.com/urizennnn/ScriptPad/internal/Layout`
 )
 
 func main() {
-	a := app.New()
-	w := a.NewWindow("Script Pad")
-	//w.Resize(fyne.NewSize(1024, 800))
-	Menu.Init()
-
-	// a.Settings().SetTheme(theme.DarkTheme())
-
-	w.SetMainMenu(Menu.AppMenu)
-	w.SetContent(Layout.MakeGui())
-	w.ShowAndRun()
+    var a = app.New()
+    a.Settings().SetTheme(theme.AdwaitaTheme())
+    var W = a.NewWindow("Script Pad")
+    var Ui = &Layout.Gui{Win: W}
+    
+    W.Resize(fyne.NewSize(900, 700))
+    Menu.Init()
+    
+    // a.Settings().SetTheme(theme.DarkTheme())
+    W.SetMainMenu(Menu.AppMenu)
+    W.SetContent(Ui.MakeGui())
+    
+    W.ShowAndRun()
 }
