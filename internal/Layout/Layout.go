@@ -60,7 +60,7 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
         },
     )
     
-    left := container.NewStack(CreateToolbar(g.Win, &Gui{Win: g.Win}), files)
+    left := container.NewStack(CreateToolbar(g), files)
     
     //tree := g.tree
     content := container.NewStack(
@@ -73,13 +73,13 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
     objs := []fyne.CanvasObject{content, left, divider}
     return container.New(newScript(left, content, divider), objs...)
 }
-func (g *Gui) OpenFolder(w fyne.Window) {
+func (g *Gui) OpenFolder() {
     fmt.Println("open")
     dialog.ShowFolderOpen(
         func(dir fyne.ListableURI, err error) {
             if err != nil {
                 log.Printf("Error opening folder: %v\n", err)
-                dialog.ShowError(err, w)
+                dialog.ShowError(err, g.Win)
                 return
             }
             
@@ -88,7 +88,7 @@ func (g *Gui) OpenFolder(w fyne.Window) {
                 return
             }
             g.Open(dir)
-        }, w,
+        }, g.Win,
     )
 }
 
@@ -111,18 +111,18 @@ func (g *Gui) Open(dir fyne.ListableURI) {
     }
 }
 
-func CreateToolbar(w fyne.Window, gui *Gui) fyne.CanvasObject {
+func CreateToolbar(gui *Gui) fyne.CanvasObject {
     file := widget.NewToolbar(
         widget.NewToolbarAction(
             theme.ContentCopyIcon(), func() {
-                gui.OpenFolder(w)
+                gui.OpenFolder()
             },
         ),
     )
     search := widget.NewToolbar(
         widget.NewToolbarAction(
             theme.SearchIcon(), func() {
-                // Add functionality for search if needed
+            
             },
         ),
     )
@@ -135,7 +135,7 @@ func CreateToolbar(w fyne.Window, gui *Gui) fyne.CanvasObject {
     extensions := widget.NewToolbar(
         widget.NewToolbarAction(
             theme.GridIcon(), func() {
-                // Add functionality for extensions if needed
+            
             },
         ),
     )
