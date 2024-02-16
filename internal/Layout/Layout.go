@@ -1,7 +1,6 @@
 package Layout
 
 import (
-    `fmt`
     "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/canvas"
     "fyne.io/fyne/v2/container"
@@ -9,7 +8,7 @@ import (
     `fyne.io/fyne/v2/dialog`
     "fyne.io/fyne/v2/theme"
     "fyne.io/fyne/v2/widget"
-    `github.com/urizennnn/ScriptPad/Toolbar`
+    "github.com/urizennnn/ScriptPad/Toolbar"
     "image/color"
     `log`
 )
@@ -20,7 +19,7 @@ type scriptLayout struct {
 
 type Gui struct {
     Win       fyne.Window
-    directory *widget.Label
+    directory *widget.Button
     tree      binding.URITree
 }
 
@@ -44,7 +43,7 @@ func (L *scriptLayout) MinSize([]fyne.CanvasObject) fyne.Size {
 }
 
 func (g *Gui) MakeGui() fyne.CanvasObject {
-    g.directory = widget.NewLabel("Open a file")
+    g.directory = widget.NewButton("Open Folder", g.OpenFolder)
     g.tree = binding.NewURITree()
     files := widget.NewTreeWithData(
         g.tree, func(branch bool) fyne.CanvasObject {
@@ -60,7 +59,7 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
         },
     )
     
-    left := container.NewStack(CreateToolbar(g), files)
+    left := container.NewStack(Toolbar.CreateToolbar(), files)
     
     //tree := g.tree
     content := container.NewStack(
@@ -74,8 +73,8 @@ func (g *Gui) MakeGui() fyne.CanvasObject {
     return container.New(newScript(left, content, divider), objs...)
 }
 func (g *Gui) OpenFolder() {
-    fmt.Println("open")
-    dialog.ShowFolderOpen(
+    log.Print("open")
+    dialog.ShowFileOpen(
         func(dir fyne.ListableURI, err error) {
             if err != nil {
                 log.Printf("Error opening folder: %v\n", err)
@@ -94,7 +93,7 @@ func (g *Gui) OpenFolder() {
 
 func (g *Gui) Open(dir fyne.ListableURI) {
     name := dir.Name()
-    g.directory.SetText(name)
+    
     g.Win.SetTitle(name)
     
     list, err := dir.List()
@@ -111,34 +110,35 @@ func (g *Gui) Open(dir fyne.ListableURI) {
     }
 }
 
-func CreateToolbar(gui *Gui) fyne.CanvasObject {
-    file := widget.NewToolbar(
-        widget.NewToolbarAction(
-            theme.ContentCopyIcon(), func() {
-                gui.OpenFolder()
-            },
-        ),
-    )
-    search := widget.NewToolbar(
-        widget.NewToolbarAction(
-            theme.SearchIcon(), func() {
-            
-            },
-        ),
-    )
-    
-    git := Toolbar.LoadGit()
-    gitToolbar := widget.NewToolbar(git)
-    debug := Toolbar.LoadDebug()
-    debugToolbar := widget.NewToolbar(debug)
-    
-    extensions := widget.NewToolbar(
-        widget.NewToolbarAction(
-            theme.GridIcon(), func() {
-            
-            },
-        ),
-    )
-    
-    return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Toolbar.Utility())
-}
+//func CreateToolbar(gui *Gui) fyne.CanvasObject {
+//    log.Println("Creating toolbar...")
+//    file := widget.NewToolbar(
+//        widget.NewToolbarAction(
+//            theme.ContentCopyIcon(), func() {
+//                log.Print("testing")
+//            },
+//        ),
+//    )
+//    search := widget.NewToolbar(
+//        widget.NewToolbarAction(
+//            theme.SearchIcon(), func() {
+//
+//            },
+//        ),
+//    )
+//
+//    git := Toolbar.LoadGit()
+//    gitToolbar := widget.NewToolbar(git)
+//    debug := Toolbar.LoadDebug()
+//    debugToolbar := widget.NewToolbar(debug)
+//
+//    extensions := widget.NewToolbar(
+//        widget.NewToolbarAction(
+//            theme.GridIcon(), func() {
+//
+//            },
+//        ),
+//    )
+//    log.Println("Toolbar creation completed.")
+//    return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Toolbar.Utility())
+//}

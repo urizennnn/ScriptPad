@@ -8,31 +8,32 @@ import (
     "log"
 )
 
-//func CreateToolbar(w fyne.Window) fyne.CanvasObject {
-//    file := main.NewToolbar(
-//        main.NewToolbarAction(
-//            theme.ContentCopyIcon(), func() {
-//                gui := Layout.Gui{}
-//                gui.OpenFolder(w)
-//            },
-//        ),
-//    )
-//    search := main.NewToolbar(
-//        main.NewToolbarAction(
-//            theme.SearchIcon(), func() {
-//
-//            },
-//        ),
-//    )
-//
-//    git := LoadGit()
-//    gitToolbar := main.NewToolbar(git)
-//    debug := LoadDebug()
-//    debugToolbar := main.NewToolbar(debug)
-//
-//    extensions := main.NewToolbar(main.NewToolbarAction(theme.GridIcon(), func() {}))
-//    return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Utility())
-//}
+func CreateToolbar() fyne.CanvasObject {
+    log.Println("created")
+    
+    file := main.NewToolbar(
+        main.NewToolbarAction(
+            theme.ContentCopyIcon(), func() {
+                log.Println("testing")
+            },
+        ),
+    )
+    search := main.NewToolbar(
+        main.NewToolbarAction(
+            theme.SearchIcon(), func() {
+            
+            },
+        ),
+    )
+    
+    git := LoadGit()
+    gitToolbar := main.NewToolbar(git)
+    debug := LoadDebug()
+    debugToolbar := main.NewToolbar(debug)
+    
+    extensions := main.NewToolbar(main.NewToolbarAction(theme.GridIcon(), func() {}))
+    return container.NewVBox(file, search, gitToolbar, extensions, debugToolbar, Utility())
+}
 
 func LoadGit() *main.ToolbarAction {
     imageResource, err := fyne.LoadResourceFromPath("images/Git.png")
