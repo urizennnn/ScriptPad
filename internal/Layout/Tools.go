@@ -1,4 +1,4 @@
-package Toolbar
+package Layout
 
 import (
     "fyne.io/fyne/v2"
@@ -8,13 +8,12 @@ import (
     "log"
 )
 
-func CreateToolbar() fyne.CanvasObject {
-    log.Println("created")
+func CreateToolbar(g *Gui) fyne.CanvasObject {
     
     file := main.NewToolbar(
         main.NewToolbarAction(
             theme.ContentCopyIcon(), func() {
-                log.Println("testing")
+                g.OpenFolder()
             },
         ),
     )
